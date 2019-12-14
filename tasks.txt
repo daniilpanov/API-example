@@ -1,0 +1,7 @@
+Current tasks:
+TODO: Create ModelsFactory
+TODO: Create ProvidersFactory (optionally based on ModelsFactory)
+TODO: Create method for add default providers at every factory
+TODO: Routing
+    (it is API, so router must be able working with all requests: GET, POST, PUT, DELETE, and PATCH,
+    and with URL)
