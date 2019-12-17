@@ -20,40 +20,6 @@ function path($path, $handler_separator = "/")
     return PHP_BASE . path_convert($handler_separator . $path, $handler_separator);
 }
 //
-function load_err_register($exception, $status = 404)
-{
-    $log_file = path("files/dumps_n_logs/loading.log");
-
-    if (!is_file($log_file))
-    {
-        if (!$file = fopen($log_file, "w"))
-        {
-            if (!is_dir(path("files/")))
-            {
-                mkdir("files");
-                mkdir("files/dumps_n_logs");
-            }
-
-            $file = fopen($log_file, "w");
-        }
-
-        fwrite($file, "");
-        flush();
-        fclose($file);
-
-        $content = "";
-    }
-    else
-    {
-        $content = file_get_contents($log_file);
-    }
-
-    $date = date("d.m.Y");
-    $time = date("H:i:s");
-
-    file_put_contents($log_file, "error $status -- Loading failed: $exception (at $date, $time)\r\n$content");
-}
-//
 function load($filename, $loading, $exception_msg = null)
 {
     if (!is_file($filename = path($filename)))

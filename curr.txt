@@ -1,0 +1,4 @@
+Routing by URL and optionally by REQUEST
+Routing has got two objects: URL and REQUESTS array
+URL is a special object, extends Url, who validates a given URL by the regex and returns needle parts of a given URL
+REQUEST is an object validates given global array REQUEST (if REQUEST has needle key and value (regex))

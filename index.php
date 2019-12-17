@@ -1,5 +1,7 @@
 <?php
 //
+include_once "libs/logging.php";
+//
 include_once "libs/loading.php";
 //
 $config = require ("config/base.php");
@@ -10,6 +12,8 @@ include_lib("helpers");
 //
 require_config("autoload");
 //
-require_config("configs");
+require_config("phpconfig");
+//
+require_config("routing");
 
-
+require_config("fgdgb");

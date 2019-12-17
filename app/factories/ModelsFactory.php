@@ -5,10 +5,10 @@ namespace app\factories;
 
 
 use app\base\BaseObj;
-use app\base\Model;
-use app\base\TableModel;
+// use app\base\Model;
+// use app\base\TableModel;
 use app\base\ScalableObj;
-use app\controllers\DbController;
+// use app\controllers\DbController;
 
 class ModelsFactory extends MultiFactory
 {
@@ -60,11 +60,11 @@ class ModelsFactory extends MultiFactory
         return $this->search($model_name, $params, $group, $only_one);
     }
 
-    public function createSomeModels($model_name, $params, $items = "*", $group_id = null)
+    /*public function createSomeModels($model_name, $params, $items = "*", $group_id = null)
     {
         $key = $model_name;
         $namespace = "app\\models\\$model_name";
-        /** @var $ref \ReflectionClass */
+        /!! @var $ref \ReflectionClass !/
         $ref = Factories::reflection()->getRef($namespace);
 
         foreach ($namespace::getKeyCols() as $col)
@@ -73,7 +73,7 @@ class ModelsFactory extends MultiFactory
                 return false;
         }
         $query = $namespace::getMultiQuery($params, $items);
-        /** @var $db DbController */
+        /!! @var $db DbController !/
         $db = DbController::get();
 
         if (is_array($query) && isset($query['templates']))
@@ -86,7 +86,7 @@ class ModelsFactory extends MultiFactory
 
         foreach ($data as $datum)
         {
-            /** @var $inst TableModel */
+            /!! @var $inst TableModel !/
             $inst = $ref->newInstanceWithoutConstructor();
             $inst->group($group_id);
             $inst->setData($datum);
@@ -97,5 +97,5 @@ class ModelsFactory extends MultiFactory
         $this->instances[$model_name][$group_id] = $all_inst;
 
         return $this->searchModel($key, [], $group_id);
-    }
+    }*/
 }

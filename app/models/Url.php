@@ -8,13 +8,14 @@ use app\base\Model;
 
 class Url extends Model
 {
-    public $host, $scheme,
+    public $full, $host, $scheme,
         $user, $pass,
         $path_str, $path,
-        $query_str, $query, $method;
+        $query_str, $query;
 
     public function __construct($url)
     {
+        $this->full = $url;
         $data = parse_url($url);
 
         $this->host = $data['host'];
@@ -30,8 +31,6 @@ class Url extends Model
 
         $this->query_str = isset($data['query']) ? $data['query'] : null;
         $this->query = explode("&", $this->query_str);
-        //
-        $this->method = $_SERVER['REQUEST_METHOD'];
     }
 
     /** @var $instance self|null */
@@ -96,8 +95,11 @@ class Url extends Model
         return self::$instance->pass;
     }
 
-    public static function method()
+    public static function getFullPath()
     {
-        return self::$instance->method;
+        $res = self::$instance->scheme . "://";
+        $res .= self::$instance->host . self::$instance->path_str;
+
+        return $res;
     }
 }
