@@ -5,54 +5,70 @@ namespace app\models;
 
 
 use app\base\Model;
+use app\controllers\DbController;
 
 class User extends Model
 {
-    const CREATE = "c", SIGNIN = "si",
-        DELETE = "d", PATCH = "p";
-
     public
         //
-        $login,
-        $password,
+        $id = null,
         //
-        $mission,
-        $status,
+        $login = null,
+        $password = null,
         //
-        $info = null;
+        $token = null;
 
-    public function __construct($login, $password, $mission)
+    public function signup()
+    {
+
+    }
+
+    public function delete()
+    {
+
+    }
+
+    public function patch($password)
+    {
+
+    }
+
+    public function signin($login, $password)
     {
         //
         $this->login = $login;
-        $this->password = $password;
-        //
-        $this->mission = $mission;
+        $this->password = password($password);
+
+        $user = DbController::get()
+            ->query(
+                "SELECT * FROM users WHERE login=:l AND password=:p",
+                ['l' => $this->login, 'p' => $this->password]
+            );
+
+        if (!$user)
+            return false;
+
+        $user = $user->fetch();
+
+        if (!$user)
+            return false;
+
+        $this->id = $user['id'];
+        // TODO: Token generation
+        $this->token = "";
+
+        return true;
     }
 
-    public function init()
+    public function signout()
     {
-        switch ($this->mission)
+        if (!isset($_SESSION['user']))
         {
-            case self::CREATE:
-
-                break;
-
-            case self::SIGNIN:
-
-                break;
-
-            case self::DELETE:
-
-                break;
-
-            case self::PATCH:
-
-                break;
-
-            default:
-                
-                break;
+            (new Response(401))->init();
+            return;
         }
+
+        (new Response(200, $_SESSION['user']))->init();
+        unset($_SESSION['user']);
     }
 }

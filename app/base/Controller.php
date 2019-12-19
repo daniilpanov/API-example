@@ -9,7 +9,7 @@ use app\factories\Factories;
 abstract class Controller extends BaseObj
 {
     /**
-     * @return self
+     * @return static
      */
     public static function get()
     {
@@ -18,5 +18,14 @@ abstract class Controller extends BaseObj
         $clazz = end($clazz);
 
         return Factories::controllers()->controller($clazz);
+    }
+
+    public function call($request, $data)
+    {
+        $request = strtolower($request) . "Request";
+        if (!method_exists($this, $request))
+            return false;
+
+        return $this->$request(...$data);
     }
 }

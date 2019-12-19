@@ -10,10 +10,22 @@ define('PHP_BASE', $config['doc_root']);
 //
 include_lib("helpers");
 //
+include_lib("auth");
+//
 require_config("autoload");
 //
 require_config("phpconfig");
 //
+$connection = \app\factories\Factories::models()
+    ->createModel(
+        "Connection",
+        ["localhost", "test", "php", "12345"]
+    );
+$connection->connect();
+
+\app\controllers\DbController::get()
+    ->init($connection);
+//
 require_config("routing");
 
-require_config("fgdgb");
+\app\controllers\Router::get()->route();

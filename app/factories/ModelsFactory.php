@@ -20,7 +20,6 @@ class ModelsFactory extends MultiFactory
      */
     public function createModel($model_name, $params = [], $register = true)
     {
-        $model_name .= "Model";
         $model = "app\\models\\$model_name";
 
         $instance = $this->create($model, $params, $model_name, $register);
@@ -37,7 +36,6 @@ class ModelsFactory extends MultiFactory
      */
     public function createIfNotExists($model_name, $params = [], $group = null, $register = true)
     {
-        $model_name .= "Model";
         $model = "app\\models\\$model_name";
 
         if (!$model_obj = $this->searchModel($model_name, $params, $group, true))
@@ -55,8 +53,6 @@ class ModelsFactory extends MultiFactory
      */
     public function searchModel($model_name, $params = [], $group = null, $only_one = false)
     {
-        $model_name .= "Model";
-
         return $this->search($model_name, $params, $group, $only_one);
     }
 

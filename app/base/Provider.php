@@ -6,10 +6,10 @@ namespace app\base;
 
 abstract class Provider
 {
-    /** @var $vars string[] */
-    public $vars = [];
-    /** @var $methods string[] */
-    public $methods;
+    /** @var $vars string[]|string */
+    public $vars = "*";
+    /** @var $methods string[]|string */
+    public $methods = "*";
     /** @var $id int */
     private $id;
     /** @var $class string */

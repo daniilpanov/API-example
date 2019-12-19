@@ -23,8 +23,13 @@ class MultiFactory extends BaseObj
             $object_key = $class;
 
         return ($save
-            ? $this->register(new $class(...array_values($params)), $object_key, $group)
-            : new $class(...array_values($params)));
+            ? $this->register($this->obj(new $class(...array_values($params))), $object_key, $group)
+            : $this->obj(new $class(...array_values($params))));
+    }
+
+    protected function obj(BaseObj $obj)
+    {
+        return self::$providing ? new ScalableObj($obj) : $obj;
     }
 
     protected function register($obj, $key, $group = null)

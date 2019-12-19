@@ -51,6 +51,15 @@ class Factories extends SingletonFactory
 
     /**
      * @param $providers bool
+     * @return EventsFactory
+     */
+    public static function events($providers = false)
+    {
+        return self::get("Events", "events", $providers);
+    }
+
+    /**
+     * @param $providers bool
      * @return ReflectionFactory
      */
     public static function reflection($providers = false)
